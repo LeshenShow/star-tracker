@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    // Исходный код и сборка
+    "rootDir": "src", // Папка с исходниками
+    "outDir": "dist", // Папка для скомпилированного JS
+
+    // Цель JS и модули
+    "target": "ES2020", // Современный JS
+    "module": "ES2020", // Используем ES модули (import/export)
+    "moduleResolution": "Node", // Корректное разрешение модулей в Node.js
+    "esModuleInterop": true, // Позволяет импортировать CommonJS пакеты через import
+    "forceConsistentCasingInFileNames": true, // Ошибки при несовпадении регистра
+
+    // Строгий режим проверки типов
+    "strict": true, // Включает все строгие проверки TypeScript
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    // Карты и декларации
+    "sourceMap": true, // Генерация .map файлов для отладки
+    "declaration": true, // Генерация .d.ts файлов
+    "declarationMap": true, // Карта для .d.ts файлов
+
+    // Упрощение работы с node_modules
+    "skipLibCheck": true, // Пропуск проверки типов в зависимостях
+
+    // Модули
+    "isolatedModules": true, // Проверка каждого файла как модуля
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force"
+  },
+  "include": ["src"] // Компилируем только папку src
+}
