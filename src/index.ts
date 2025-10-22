@@ -2,8 +2,6 @@ import { Telegraf, Context } from "telegraf"
 import dotenv from "dotenv"
 import type { Message } from "telegraf/types"
 import { startCommand } from "./commands/start"
-import { helpCommand } from "./commands/help"
-import { aboutCommand } from "./commands/about"
 import { addCommand } from "./commands/add"
 import { deleteCommand } from "./commands/delete"
 import { listCommand } from "./commands/list"
@@ -29,11 +27,11 @@ bot.on("text", (ctx: Context) => {
   console.log(JSON.stringify(message, null, 2))
   ctx.reply(`Ты сказал: "${message.text}"`)
 })
-// Обработка нажатий Inline кнопок
-bot.action("HELP", ctx => {
-  helpCommand(ctx)
-  ctx.answerCbQuery() // закрывает "загрузка" на кнопке
-})
+// // Обработка нажатий Inline кнопок
+// bot.action("HELP", ctx => {
+//   helpCommand(ctx)
+//   ctx.answerCbQuery() // закрывает "загрузка" на кнопке
+// })
 
 // Обработка ошибок (чтобы бот не падал)
 bot.catch((err, ctx) => {
