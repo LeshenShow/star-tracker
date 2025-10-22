@@ -4,27 +4,29 @@ import type { Message } from "telegraf/types"
 import { startCommand } from "./commands/start"
 import { helpCommand } from "./commands/help"
 import { aboutCommand } from "./commands/about"
+import { addCommand } from "./commands/add"
+import { deleteCommand } from "./commands/delete"
+import { listCommand } from "./commands/list"
+import { setupCalendar } from "./commands/calendar"
 
-// Загружаем переменные окружения из .env
 dotenv.config()
-
-// Проверяем наличие токена
 const BOT_TOKEN = process.env.BOT_TOKEN
 if (!BOT_TOKEN) {
   throw new Error("❌ BOT_TOKEN не найден в .env")
 }
-
-// Инициализация бота
 const bot = new Telegraf(BOT_TOKEN)
-
+setupCalendar(bot)
 // Обработка команд
 bot.start((ctx: Context) => startCommand(ctx))
-bot.command("help", (ctx: Context) => helpCommand(ctx))
-bot.command("about", (ctx: Context) => aboutCommand(ctx))
+
+bot.command("add", (ctx: Context) => addCommand(ctx))
+bot.command("list", (ctx: Context) => listCommand(ctx))
+bot.command("delete", (ctx: Context) => deleteCommand(ctx))
 
 // Эхо всех текстовых сообщений
 bot.on("text", (ctx: Context) => {
   const message = ctx.message as Message.TextMessage
+  console.log(JSON.stringify(message, null, 2))
   ctx.reply(`Ты сказал: "${message.text}"`)
 })
 // Обработка нажатий Inline кнопок
@@ -33,10 +35,6 @@ bot.action("HELP", ctx => {
   ctx.answerCbQuery() // закрывает "загрузка" на кнопке
 })
 
-bot.action("ABOUT", ctx => {
-  aboutCommand(ctx)
-  ctx.answerCbQuery()
-})
 // Обработка ошибок (чтобы бот не падал)
 bot.catch((err, ctx) => {
   console.error(`Ошибка в обновлении ${ctx.updateType}:`, err)

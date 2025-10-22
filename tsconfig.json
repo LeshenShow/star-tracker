@@ -27,7 +27,12 @@
     // Модули
     "isolatedModules": true, // Проверка каждого файла как модуля
     "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force"
+    "moduleDetection": "force",
+    // Типы
+    "typeRoots": [
+      "./node_modules/@types", // стандартные типы npm
+      "./types" // наши кастомные декларации
+    ]
   },
   "include": ["src"] // Компилируем только папку src
 }

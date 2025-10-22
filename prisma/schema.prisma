@@ -4,12 +4,21 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+// npx prisma studio - просмотр
+// Если ты добавишь поле в схему, Prisma Client нужно пересоздать через npx prisma generate.
+//npx prisma migrate dev --name add-mood-to-entry
+
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
+}
+model Entry {
+  id        Int      @id @default(autoincrement())
+  text      String
+  createdAt DateTime @default(now())
 }
