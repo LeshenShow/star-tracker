@@ -1,0 +1,9 @@
+
+
+{
+  "imports": {
+    "std/": "https://deno.land/std@0.203.0/",
+     "grammy/": "https://deno.land/x/grammy@v1.21.1/"
+
+  }
+}
